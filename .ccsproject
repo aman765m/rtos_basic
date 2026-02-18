@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVariant value="50:Theia-based"/>
+	<ccsVersion value="70.4.0"/>
+	<deviceFamily value="C2000"/>
+	<executableActions value=""/>
+	<createSlaveProjects value=""/>
+	<templateProperties value="id=empty_sysconfig_64qfp.projectspec.rtos_basic"/>
+	<origin value="/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/examples/pinmux/CCS/empty_sysconfig_64qfp.projectspec"/>
+	<filesToOpen value=""/>
+</projectOptions>

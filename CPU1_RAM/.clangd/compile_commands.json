@@ -1,0 +1,27 @@
+[
+   {
+      "directory" : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM",
+      "command"   : "clang++ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic\" -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/device\" -I\"/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib/\" -I\"/home/aman-singh/ti/ccs2041/ccs/tools/compiler/ti-cgt-c2000_22.6.3.LTS/include\" -DDEBUG -DRAM -D__TMS320C28XX__ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg\" -DF28002x=1 -xc",
+      "file"      : "/home/aman-singh/workspace_ccstheia/rtos_basic/device/device.c"
+   },
+   {
+      "directory" : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM",
+      "command"   : "clang++ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic\" -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/device\" -I\"/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib/\" -I\"/home/aman-singh/ti/ccs2041/ccs/tools/compiler/ti-cgt-c2000_22.6.3.LTS/include\" -DDEBUG -DRAM -D__TMS320C28XX__ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg\" -DF28002x=1",
+      "file"      : "/home/aman-singh/workspace_ccstheia/rtos_basic/device/f28002x_codestartbranch.asm"
+   },
+   {
+      "directory" : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM",
+      "command"   : "clang++ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic\" -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/device\" -I\"/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib/\" -I\"/home/aman-singh/ti/ccs2041/ccs/tools/compiler/ti-cgt-c2000_22.6.3.LTS/include\" -DDEBUG -DRAM -D__TMS320C28XX__ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg\" -DF28002x=1 -xc",
+      "file"      : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg/board.c"
+   },
+   {
+      "directory" : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM",
+      "command"   : "clang++ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic\" -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/device\" -I\"/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib/\" -I\"/home/aman-singh/ti/ccs2041/ccs/tools/compiler/ti-cgt-c2000_22.6.3.LTS/include\" -DDEBUG -DRAM -D__TMS320C28XX__ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg\" -DF28002x=1 -xc",
+      "file"      : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg/c2000ware_libraries.c"
+   },
+   {
+      "directory" : "/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM",
+      "command"   : "clang++ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic\" -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/device\" -I\"/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib/\" -I\"/home/aman-singh/ti/ccs2041/ccs/tools/compiler/ti-cgt-c2000_22.6.3.LTS/include\" -DDEBUG -DRAM -D__TMS320C28XX__ -I\"/home/aman-singh/workspace_ccstheia/rtos_basic/CPU1_RAM/syscfg\" -DF28002x=1 -xc",
+      "file"      : "/home/aman-singh/workspace_ccstheia/rtos_basic/main.c"
+   }
+]
