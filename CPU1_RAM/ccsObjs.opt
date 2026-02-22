@@ -1,8 +1,0 @@
-"./syscfg/board.obj"
-"./syscfg/c2000ware_libraries.obj"
-"./main.obj"
-"./device/device.obj"
-"./device/f28002x_codestartbranch.obj"
-"../28002x_generic_ram_lnk.cmd"
-"/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib/ccs/Debug/driverlib.lib"
--llibc.a

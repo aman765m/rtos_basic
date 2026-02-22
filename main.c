@@ -119,6 +119,8 @@ __interrupt void Timer0_ISR(void)
     EALLOW;
     HWREGH( PIECTRL_BASE + PIE_O_ACK ) |= 1U;
     EDIS;
+    // uint32_t * u32StackEdit = 
+    *(uint32_t *)(0x411) = (uint16_t)0xA607;
 }
 
 void InitCPUTimer0(void)
