@@ -3,7 +3,9 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/home/aman-singh/ti/C2000Ware_6_00_01_00/driverlib/f28002x/driverlib",
+                "/home/aman-singh/ti/ccs2041/ccs/tools/compiler/ti-cgt-c2000_22.6.3.LTS/include"
             ],
             "defines": [
                 "__interrupt=",

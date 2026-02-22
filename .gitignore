@@ -1,3 +1,5 @@
 *.cache*
 CPU1_RAM*
 *.clang*
+!.clang-format
+FLASH
