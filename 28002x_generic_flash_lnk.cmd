@@ -12,7 +12,8 @@ MEMORY
    RAMLS7           : origin = 0x0000B800, length = 0x00000800*/
 
    /* Combining all the LS RAMs */
-   RAMLS4567        : origin = 0x0000A000, length = 0x00002000
+   RAMLS4567        : origin = 0x0000A000, length = 0x00001800 /* Excluding RAMLS7 */
+   TASK_RUN         : origin = 0x0000B800, length = 0x00000800 /* RAMLS7 */
    RAMGS0           : origin = 0x0000C000, length = 0x000007F8
 // RAMGS0_RSVD      : origin = 0x0000C7F8, length = 0x00000008 /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
 
@@ -38,7 +39,9 @@ MEMORY
    FLASH_BANK0_SEC11 : origin = 0x08B000, length = 0x001000	/* on-chip Flash */
    FLASH_BANK0_SEC12 : origin = 0x08C000, length = 0x001000	/* on-chip Flash */
    FLASH_BANK0_SEC13 : origin = 0x08D000, length = 0x001000	/* on-chip Flash */
-   FLASH_BANK0_SEC14 : origin = 0x08E000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC14 : origin = 0x08E000, length = 0x000800	/* on-chip Flash */
+   TASK_LOAD         : origin = 0x08E800, length = 0x0007B0	/* on-chip Flash */
+   TASK_META         : origin = 0x08EFB0, length = 0x000050 /* on-chip Flash */
    FLASH_BANK0_SEC15 : origin = 0x08F000, length = 0x000FF0	/* on-chip Flash */
 // FLASH_BANK0_SEC15_RSVD     : origin = 0x08FFF0, length = 0x000010  /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
 
@@ -68,6 +71,14 @@ SECTIONS
     /*  Allocate IQ math areas: */
    IQmath           : > RAMLS4567
    IQmathTables     : > RAMLS4567
+
+   /* Sections for tasks */
+   GROUP            : LOAD = TASK_LOAD, RUN = TASK_RUN, table(_task_copy_table), ALIGN(8)
+   {
+      sec_task1         : {*(sec_task1)}
+      sec_task2         : {*(sec_task2)}
+   }
+   .ovly            : > TASK_META
 
   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC1,
                   RUN = RAMGS0,
