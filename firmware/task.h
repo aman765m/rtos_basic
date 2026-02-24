@@ -12,9 +12,10 @@
 #define TASK_H
 
 #include <stdint.h>
+#include <cpy_tbl.h>
 
 #define TCB_STACK_SIZE          ( 128U )
-#define STF_LENGTH              ( 0x14UL )
+#define STF_LENGTH              ( 0x0FUL )
 
 #define STF_OFFSET_ST0          ( 0U )
 #define STF_VAL_ST0             ( 0x008CU )
@@ -29,8 +30,6 @@
 #define STF_VAL_PC_T2           ( ( uint32_t )Task2 )
 
 #define TCB_SP_OFFSET           ( TCB_STACK_SIZE )
-
-
 
 
 
