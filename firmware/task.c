@@ -81,10 +81,11 @@ void Task1(void)
     for(;;)
     {
         /* Toggle GPIO 33 */
-        *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        GPIO_togglePin( 33U );
         
         int32_t a;
-        for( a = 0; a< 0x5fffff; a++ )
+        for( a = 0; a< 0x5ffff; a++ )
         {;}
     }
 }
@@ -98,10 +99,11 @@ void Task2(void)
     for(;;)
     {
         /* Toggle GPIO 33 */
-        *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        GPIO_togglePin( 33U );
         
         int32_t a;
-        for( a = 0; a< 0xfffff; a++ )
+        for( a = 0; a< 0x1ffff; a++ )
         {;}
     }
 }

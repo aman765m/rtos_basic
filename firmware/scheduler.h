@@ -14,7 +14,7 @@
 
 #include "task.h"
 
-extern uint16_t gu16TcbNewSp;
+extern volatile uint16_t gu16TcbNewSp;
 
 static inline void prvScheduleTask_cb( void )
 {  
