@@ -56,6 +56,15 @@
 #include "scheduler.h"
 #include "task.h"
 
+TCB_t Task1_TCB;
+TCB_t Task2_TCB;
+TCB_t Task3_TCB;
+TCB_t Task4_TCB;
+
+void Task1(void);
+void Task2(void);
+void Task3(void);
+void Task4(void);
 //
 // Main
 //
@@ -102,6 +111,11 @@ void main(void)
     // Enter code here
     GPIO_setDirectionMode(33, GPIO_DIR_MODE_OUT);
 
+    Task_RegisterTcb( &Task1_TCB, ( TASK_PTR_t * )Task1, 1U, 1U );
+    Task_RegisterTcb( &Task2_TCB, ( TASK_PTR_t * )Task2, 1U, 1U );
+    Task_RegisterTcb( &Task3_TCB, ( TASK_PTR_t * )Task3, 1U, 1U );
+    Task_RegisterTcb( &Task4_TCB, ( TASK_PTR_t * )Task4, 1U, 1U );
+
     Task_Init();
     Scheduler_Init();
     //
@@ -113,6 +127,74 @@ void main(void)
     }
 }
 
+/**
+ * @brief
+ *
+ */
+void Task1(void)
+{
+    for(;;)
+    {
+        /* Toggle GPIO 33 */
+        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        GPIO_togglePin( 33U );
+        
+        int32_t a;
+        for( a = 0; a< 0xAffff; a++ )
+        {;}
+    }
+}
+
+/**
+ * @brief
+ *
+ */
+void Task2(void)
+{
+    for(;;)
+    {
+        /* Toggle GPIO 33 */
+        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        GPIO_togglePin( 33U );
+        
+        int32_t a;
+        for( a = 0; a< 0x6ffff; a++ )
+        {;}
+    }
+}
+/**
+ * @brief
+ *
+ */
+void Task3(void)
+{
+    for(;;)
+    {
+        /* Toggle GPIO 33 */
+        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        GPIO_togglePin( 33U );
+        
+        int32_t a;
+        for( a = 0; a< 0x3ffff; a++ )
+        {;}
+    }
+}/**
+ * @brief
+ *
+ */
+void Task4(void)
+{
+    for(;;)
+    {
+        /* Toggle GPIO 33 */
+        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
+        GPIO_togglePin( 33U );
+        
+        int32_t a;
+        for( a = 0; a< 0x1ffff; a++ )
+        {;}
+    }
+}
 //
 // End of File
 //

@@ -12,10 +12,11 @@
 #define TASK_H
 
 #include <stdint.h>
-#include <cpy_tbl.h>
+#include <stdbool.h>
 
+#define MAX_TASKS               ( 10U )
 #define TCB_STACK_SIZE          ( 128U )
-#define STF_LENGTH              ( 0x0FUL )
+#define STF_LENGTH              ( 0x0FUL + 0x18UL ) /* Take care of stack alignment */
 
 #define STF_OFFSET_ST0          ( 0U )
 #define STF_VAL_ST0             ( 0x008CU )
@@ -26,12 +27,6 @@
 #define STF_OFFSET_IER          ( 10U )
 #define STF_VAL_IER             ( 0x0001U )
 #define STF_OFFSET_PC           ( 12U )
-#define STF_VAL_PC_T1           ( ( uint32_t )Task1 )
-#define STF_VAL_PC_T2           ( ( uint32_t )Task2 )
-
-#define TCB_SP_OFFSET           ( TCB_STACK_SIZE )
-
-
 
 typedef void ( * TASK_PTR_t )( void );
 
@@ -40,11 +35,15 @@ typedef struct
     uint16_t u16Stack[ TCB_STACK_SIZE ];
     uint32_t u32StackPtr;
     TASK_PTR_t fpTaskFnPtr;
+    uint16_t u16Priority;
+    uint16_t u16Id;
+    uint32_t u32Period;
 } TCB_t;
 
-extern TCB_t TcbTask1;
-extern TCB_t TcbTask2;
+extern TCB_t * pxTaskControlBlock[ MAX_TASKS ];
+extern int16_t s16nTasksRegistered;
 
 void Task_Init( void );
+bool Task_RegisterTcb( TCB_t * pxTcb, TASK_PTR_t fpTaskPtr, uint16_t u16Priority, uint32_t u32Period );
 
 #endif

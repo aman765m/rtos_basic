@@ -14,10 +14,12 @@
 #include <string.h>
 #include "driverlib.h"
 
-TCB_t TcbTask1;
-TCB_t TcbTask2;
 
 volatile uint16_t gu16TcbNewSp;
+
+
+TCB_t * pxTaskControlBlock[ MAX_TASKS ];
+int16_t s16nTasksRegistered = -1;
 
 #ifdef _FLASH
 extern void _task_copy_table;
@@ -33,9 +35,6 @@ void Task1(void);
 #pragma SET_CODE_SECTION( "sec_task2")
 void Task2(void);
 #pragma SET_CODE_SECTION()
-#else
-void Task1(void);
-void Task2(void);
 #endif
 /**
  * @brief
@@ -48,62 +47,53 @@ void Task_Init(void)
     copy_in( ( COPY_TABLE * )&_task_copy_table );
 #endif
 
-    memset( ( void * )&TcbTask1.u16Stack, 0, sizeof( TcbTask1.u16Stack ) );
-    memset( ( void * )&TcbTask2.u16Stack, 0, sizeof( TcbTask2.u16Stack ) );
+    int16_t s16TaskIdx;
 
-    TcbTask1.u16Stack[ STF_OFFSET_ST0 ] = STF_VAL_ST0;
-    TcbTask1.u16Stack[ STF_OFFSET_ST1 ] = STF_VAL_ST1;
-    TcbTask1.u16Stack[ STF_OFFSET_DP ]  = STF_VAL_DP;
-    TcbTask1.u16Stack[ STF_OFFSET_IER ] = STF_VAL_IER;
-    TcbTask1.u16Stack[ STF_OFFSET_PC ]  = STF_VAL_PC_T1;
-
-    TcbTask2.u16Stack[ STF_OFFSET_ST0 ] = STF_VAL_ST0;
-    TcbTask2.u16Stack[ STF_OFFSET_ST1 ] = STF_VAL_ST1;
-    TcbTask2.u16Stack[ STF_OFFSET_DP ]  = STF_VAL_DP;
-    TcbTask2.u16Stack[ STF_OFFSET_IER ] = STF_VAL_IER;
-    TcbTask2.u16Stack[ STF_OFFSET_PC ]  = STF_VAL_PC_T2;
-
-    TcbTask1.fpTaskFnPtr = ( TASK_PTR_t )Task1;
-    TcbTask1.u32StackPtr = ( ( uint32_t )TcbTask1.u16Stack + STF_LENGTH );
-
-    TcbTask2.fpTaskFnPtr = ( TASK_PTR_t )Task2;
-    TcbTask2.u32StackPtr = ( ( uint32_t )TcbTask2.u16Stack + STF_LENGTH );
-
-
-}
-
-/**
- * @brief
- *
- */
-void Task1(void)
-{
-    for(;;)
+    for( s16TaskIdx = 0; s16TaskIdx <= s16nTasksRegistered; s16TaskIdx++ )
     {
-        /* Toggle GPIO 33 */
-        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
-        GPIO_togglePin( 33U );
-        
-        int32_t a;
-        for( a = 0; a< 0x5ffff; a++ )
-        {;}
+        memset( ( void * )&( pxTaskControlBlock[ s16TaskIdx ]->u16Stack[ 0 ]), 0, ( size_t )TCB_STACK_SIZE );
+
+        pxTaskControlBlock[ s16TaskIdx ]->u16Stack[ STF_OFFSET_ST0 ]    = STF_VAL_ST0;
+        pxTaskControlBlock[ s16TaskIdx ]->u16Stack[ STF_OFFSET_ST1 ]    = STF_VAL_ST1;
+        pxTaskControlBlock[ s16TaskIdx ]->u16Stack[ STF_OFFSET_DP ]     = STF_VAL_DP;
+        pxTaskControlBlock[ s16TaskIdx ]->u16Stack[ STF_OFFSET_IER ]    = STF_VAL_IER;
+        pxTaskControlBlock[ s16TaskIdx ]->u16Stack[ STF_OFFSET_PC ]     = ( uint32_t )pxTaskControlBlock[ s16TaskIdx ]->fpTaskFnPtr;
+        pxTaskControlBlock[ s16TaskIdx ]->u32StackPtr                   = ( uint32_t )pxTaskControlBlock[ s16TaskIdx ]->u16Stack + STF_LENGTH;
     }
 }
 
 /**
- * @brief
- *
+ * @brief 
+ * 
+ * @param pxTcb 
+ * @param fpTaskPtr 
+ * @param u16Priority 
+ * @return true 
+ * @return false 
  */
-void Task2(void)
+bool Task_RegisterTcb( TCB_t * pxTcb, TASK_PTR_t fpTaskPtr, uint16_t u16Priority, uint32_t u32Period )
 {
-    for(;;)
+    bool bStatus;
+
+    /** TODO: Add NULL check for recieved pointers */
+
+    if( ( int16_t )MAX_TASKS > s16nTasksRegistered )
     {
-        /* Toggle GPIO 33 */
-        // *((uint32_t *)((uintptr_t)0x7f0e)) = 2U;
-        GPIO_togglePin( 33U );
-        
-        int32_t a;
-        for( a = 0; a< 0x1ffff; a++ )
-        {;}
+        s16nTasksRegistered++;
+
+        pxTaskControlBlock[ s16nTasksRegistered ] = pxTcb;
+
+        pxTcb->fpTaskFnPtr = fpTaskPtr;
+        pxTcb->u16Priority = u16Priority;
+        pxTcb->u32Period = u32Period;
+        pxTcb->u16Id = s16nTasksRegistered;
+
+        bStatus = true;
     }
+    else
+    {
+        bStatus = false;
+    }
+
+    return bStatus;
 }
